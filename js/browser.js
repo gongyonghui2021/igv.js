@@ -70,6 +70,7 @@ import ZoomWidget from "./ui/zoomWidget.js";
 import UserFeedback from "./ui/userFeedback.js";
 import DataRangeDialog from "./ui/dataRangeDialog.js";
 import HtsgetReader from "./htsget/htsgetReader.js";
+import TrackSelectorControl from "./ui/trackSelectorControl.js";
 
 // igv.scss - $igv-multi-locus-gap-width
 const multiLocusGapDivWidth = 1
@@ -116,7 +117,7 @@ class Browser {
         this.isCenterGuideVisible = false;
 
         this.showSampleNames = false;
-
+        this.showTrackSelector = false;
         this.cursorGuideVisible = false;
         this.constants = {
             dragThreshold: 3,
@@ -157,6 +158,7 @@ class Browser {
         }
 
         this.showSampleNames = config.showSampleNames;
+        this.showTrackSelector = config.showTrackSelector;
         this.showSampleNameButton = config.showSampleNameButton;
         this.sampleNameViewportWidth = config.sampleNameViewportWidth || defaultSampleNameViewportWidth;
 
@@ -216,17 +218,17 @@ class Browser {
         const $navBar = $('<div>', {class: 'igv-navbar'});
         this.$navigation = $navBar;
 
-        const $navbarLeftContainer = $('<div>', {class: 'igv-navbar-left-container'});
+        const $navbarLeftContainer = $('<div>', {class: 'igv-navbar-left-container hidden-md'});
         $navBar.append($navbarLeftContainer);
 
         // IGV logo
-        const $logo = $('<div>', {class: 'igv-logo'});
-        $navbarLeftContainer.append($logo);
+       // const $logo = $('<div>', {class: 'igv-logo'});
+       // $navbarLeftContainer.append($logo);
 
-        const logoSvg = logo();
-        logoSvg.css("width", "34px");
-        logoSvg.css("height", "32px");
-        $logo.append(logoSvg);
+       // const logoSvg = logo();
+       // logoSvg.css("width", "34px");
+       // logoSvg.css("height", "32px");
+       // $logo.append(logoSvg);
 
         this.$current_genome = $('<div>', {class: 'igv-current-genome'});
         $navbarLeftContainer.append(this.$current_genome);
@@ -289,6 +291,9 @@ class Browser {
         if (true === config.showTrackLabelButton) {
             this.trackLabelControl = new TrackLabelControl($toggle_button_container, this);
         }
+        if(true === config.showTrackSelector){
+            this.trackSelectorControl = new TrackSelectorControl($toggle_button_container,this)
+        }
 
         // if (true === config.showSampleNameButton) {
         this.sampleNameControl = new SampleNameControl($toggle_button_container, this)
@@ -315,12 +320,12 @@ class Browser {
         return $navBar;
 
     }
-
-
     getSampleNameViewportWidth() {
         return false === this.showSampleNames ? 0 : this.sampleNameViewportWidth
     }
-
+    openTrackSelector(config){
+        alert("implements browser.openTrackSelector function");
+    }
     startSpinner() {
         const $spinner = this.$spinner;
         if ($spinner) {
