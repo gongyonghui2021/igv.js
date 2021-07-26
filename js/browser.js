@@ -284,15 +284,15 @@ class Browser {
         $navbarRightContainer.append($toggle_button_container);
         this.$toggle_button_container = $toggle_button_container;
 
+        if(true === config.showTrackSelector){
+            this.trackSelectorControl = new TrackSelectorControl($toggle_button_container,this)
+        }
         this.cursorGuide = new CursorGuide($(this.trackContainer), $toggle_button_container, config, this);
 
         this.centerGuide = new CenterGuide($(this.trackContainer), $toggle_button_container, config, this);
 
         if (true === config.showTrackLabelButton) {
             this.trackLabelControl = new TrackLabelControl($toggle_button_container, this);
-        }
-        if(true === config.showTrackSelector){
-            this.trackSelectorControl = new TrackSelectorControl($toggle_button_container,this)
         }
 
         // if (true === config.showSampleNameButton) {

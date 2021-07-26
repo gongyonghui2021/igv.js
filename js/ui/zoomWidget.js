@@ -45,7 +45,7 @@ const ZoomWidget = function (browser, $parent) {
     });
 
     // Range slider
-    $div = $('<div class="hidden-md">>');
+    $div = $('<div class="hidden-md">');
     this.$zoomContainer.append($div);
 
     this.$slider = $('<input type="range"/>');
